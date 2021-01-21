@@ -1,0 +1,26 @@
+{
+    "name": "public_library_api",
+    "version": "1.0.24",
+    "description": "This package contains the REST API for assignment 1 of Web programming 3100.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "format": "prettier \"src/**/*.{js,html}\" --write",
+        "start": "node index.js"
+    },
+    "keywords": [
+        "rest",
+        "api",
+        "es6",
+        "json"
+    ],
+    "author": "Johan Arcos Mendez",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "prettier": "^2.2.1"
+    },
+    "type": "module"
+}
