@@ -30,7 +30,7 @@ module.exports.Book = class {
             },
         );
     }
-    //Method to add an individual book provided an id
+    //Method to get an individual book provided an id
     getBook(id) {
         return this.data[id];
     }
@@ -57,5 +57,22 @@ module.exports.Book = class {
             data[bookData] = this.data[bookData].name;
         }
         return data;
+    }
+    //Special method that checks to see if there exists a loan with such bookID
+    isBookAvailable(bookId) {
+        const loanFile = "src/models/loan/loans.json";
+        let loanData = JSON.parse(fs.readFileSync(loanFile, "utf-8"));
+        for (const loan in loanData) {
+            if (loanData[loan].bookId == bookId) {
+                {
+                    if (loanData[loan].returned == true) {
+                        return true;
+                    }
+                    return false; // can save operations
+                }
+                return false;
+            }
+        }
+        return true;
     }
 };

@@ -49,12 +49,19 @@ module.exports.postController = (req, res) => {
 // Controller that GETs a book given its id
 module.exports.getController = (req, res) => {
     //If book id already exists, then execute
-    if (!checkValidId(req.params.id, res)) {
-        let data = book.getBook(req.params.id);
-        res.status(200).send(data);
-        return; // In order to avoid executing other .send
+    if (checkValidId(req.params.id, res)) {
+        if (book.bookExists(req.params.id)) {
+            let data = book.getBook(req.params.id);
+
+            //This additional section checks to see if the book is available or not by checking at the loans json file
+            isOnLoan = book.isBookAvailable(req.params.id);
+            res.status(200).send({ bookData: data, isAvailable: isOnLoan });
+        } else {
+            res.status(200).send({
+                error: "Book id does not exists, try again",
+            });
+        }
     }
-    res.status(200).send({ error: "Book id does not exists, try again" });
 };
 
 //Controller to GET all the books in the JSON
