@@ -12,7 +12,7 @@ app.use(express.json()); // support json encoded bodies
 // Book Router
 app.use("/api/book", bookRouter);
 // Loan Router
-app.use("api/loan", loanRouter);
+app.use("/api/loan", loanRouter);
 
 //Listening to request
 module.exports.start = () => {

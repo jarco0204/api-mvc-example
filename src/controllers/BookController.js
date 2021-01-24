@@ -8,17 +8,14 @@ let book = new BookModel.Book(); //Fulfilling requirement of loading the data be
 const checkValidId = (id, res) => {
     try {
         if (validator.isNumeric(id)) {
-            if (book.bookExists(id)) {
-                return false;
-            } else {
-                return true;
-            }
+            return true;
         } else {
             throw "Book ID is not numeric!";
         }
     } catch (err) {
         console.log(err);
         res.status(404).send({ error: err });
+        return false;
     }
 };
 
@@ -33,18 +30,20 @@ const checkValidYear = (year, res) => {
     } catch (err) {
         console.log(err);
         res.status(404).send({ error: err });
+        return false;
     }
 };
 
 //Controller that handles PUT request to add a book
 module.exports.postController = (req, res) => {
     if (checkValidId(req.params.id, res)) {
-        console.log("Book will be created");
-        book.addBook(req.params.id, req.body);
-        res.status(200).send({ message: "Book has been created" });
-        return; // In order to avoid executing other .send
+        if (!book.bookExists(req.params.id)) {
+            book.addBook(req.params.id, req.body);
+            res.status(200).send({ message: "Book has been created" });
+        } else {
+            res.status(201).send({ message: "Book Id is already taken" });
+        }
     }
-    res.status(200).send({ message: "Book not created" });
 };
 
 // Controller that GETs a book given its id
