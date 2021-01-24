@@ -36,6 +36,10 @@ const checkValidYear = (year, res) => {
 
 //Method for the bonus section of validating inputs
 const validateInputs = (body) => {
+    console.log(validator.isAlpha(body.name));
+    console.log(validator.isAlphanumeric(body.authors));
+    console.log(validator.isNumeric(body.year));
+    console.log(validator.isAlphanumeric(body.publisher));
     if (
         validator.isAlpha(body.name) &&
         validator.isAlphanumeric(body.authors) &&
@@ -44,6 +48,7 @@ const validateInputs = (body) => {
     ) {
         return true;
     }
+    console.log("no");
     return false;
 };
 
@@ -94,8 +99,8 @@ module.exports.getAllController = (req, res) => {
 
 //Controller to GET books provided their year
 module.exports.getBookYearController = (req, res) => {
-    if (checkValidYear(req.params.id, res)) {
-        let data = book.getBooksByYear(req.params.id);
+    if (checkValidYear(req.params.year, res)) {
+        let data = book.getBooksByYear(req.params.year);
         res.status(200).send(data);
     }
 };

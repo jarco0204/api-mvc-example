@@ -10,8 +10,8 @@ router.route("/all").get(book.getAllController);
 // GETs and PUTs books given a specific id
 router.route("/:id").get(book.getController).put(book.postController);
 
-//route: /api/book/year/:id
+//route: /api/book/year/:year
 // GETs books with all their information given a year
-router.route("/year/:id").get(book.getBookYearController);
+router.route("/year/:year").get(book.getBookYearController);
 
 module.exports = router;
