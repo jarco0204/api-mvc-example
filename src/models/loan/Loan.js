@@ -34,7 +34,7 @@ module.exports.Loan = class {
                 console.log("true");
                 console.log(this.data[loanData].returned);
                 this.data[loanData].returned = true;
-                this.data[loanData].dateReturned = returnDate.toDateString();
+                this.data[loanData].dateReturned = returnDate;
                 this._writedata(this.file, this.data);
             }
         }

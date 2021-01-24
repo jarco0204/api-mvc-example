@@ -34,12 +34,34 @@ const checkValidYear = (year, res) => {
     }
 };
 
+//Method for the bonus section of validating inputs
+const validateInputs = (body) => {
+    if (
+        validator.isAlpha(body.name) &&
+        validator.isAlphanumeric(body.authors) &&
+        validator.isNumeric(body.year) &&
+        validator.isAlphanumeric(body.publisher)
+    ) {
+        return true;
+    }
+    return false;
+};
+
 //Controller that handles PUT request to add a book
 module.exports.postController = (req, res) => {
     if (checkValidId(req.params.id, res)) {
         if (!book.bookExists(req.params.id)) {
-            book.addBook(req.params.id, req.body);
-            res.status(200).send({ message: "Book has been created" });
+            //returns true or false if the book was added or not
+            if (validateInputs(req.body)) {
+                book.addBook(req.params.id, req.body);
+                res.status(200).send({
+                    message: "Book has been created successfully",
+                });
+            } else {
+                res.status(404).send({
+                    message: "Book was not created, check inputs",
+                });
+            }
         } else {
             res.status(201).send({ message: "Book Id is already taken" });
         }

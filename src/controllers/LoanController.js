@@ -17,14 +17,35 @@ const checkValidId = (id, res) => {
         return false;
     }
 };
+//Method for the bonus section of validating inputs
+const validateInputs = (body) => {
+    if (
+        validator.isNumeric(body.bookId) &&
+        validator.isDate(body.date) &&
+        validator.isAlpha(body.clientName) &&
+        body.returned == false &&
+        body.dateReturned == null
+    ) {
+        return true;
+    }
+    return false;
+};
 
 //Controller to add an individual loan to the data
 // Checks to see if it valid, and then if the id doesn't exists
 module.exports.addController = (req, res) => {
     if (checkValidId(req.params.id)) {
         if (!loan.loanExists(req.params.id)) {
-            loan.addLoan(req.params.id, req.body);
-            res.status(200).send({ message: "Loan has been created" });
+            if (validateInputs(req.body)) {
+                loan.addLoan(req.params.id, req.body);
+                res.status(200).send({
+                    message: "Loan has been successfully created",
+                });
+            } else {
+                res.status(404).send({
+                    message: "Loan was not created, check inputs",
+                });
+            }
         } else {
             res.status(201).send({
                 message:

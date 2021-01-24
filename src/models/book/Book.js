@@ -11,6 +11,7 @@ module.exports.Book = class {
     _loadData(file) {
         return JSON.parse(fs.readFileSync(file, "utf-8"));
     }
+
     //Method to check if the book id exists or not
     bookExists(bookId) {
         if (bookId in this.data) {

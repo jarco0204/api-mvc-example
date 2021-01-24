@@ -1,1 +1,1 @@
-{"1":{"bookId":"1","date":"24/1/21","clientName":"Elpepe","returned":true,"dateReturned":"Sun Jan 24 2021"},"2":{"bookId":"2","date":"24/1/21","clientName":"Elpepe1","returned":false,"dateReturned":null}}
+{"1":{"bookId":"1","date":"2020-05-03","clientName":"Johan","returned":true,"dateReturned":"2021-01-24T17:39:51.131Z"},"2":{"bookId":"1","date":"2020-05-03","clientName":"Johan","returned":false,"dateReturned":null}}
