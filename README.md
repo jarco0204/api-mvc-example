@@ -1,5 +1,10 @@
+This program was written by Johan Arcos (201712353)
+
+This express web server uses nodemon in order to facilitate the process of development.
+
 This is the API that handles data for a fictional public library.
 The two main entities are Book and Loan.
+
 
 The former has these attributes:
 1)id
