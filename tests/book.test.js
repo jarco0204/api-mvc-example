@@ -26,7 +26,7 @@ let book3 = {
 request.put(
     {
         headers: { "content-type": "application/json" },
-        url: myurl + "/api/book/fail",
+        url: myurl + "/api/book/1fail",
         body: JSON.stringify(book1),
     },
     function (error, response, body) {

@@ -11,10 +11,15 @@ module.exports.Loan = class {
         return JSON.parse(fs.readFileSync(file, "utf-8"));
     }
     //Private method that writes data to file after an update
-    _writedata(file, data) {
-        fs.writeFile(file, JSON.stringify(data), "utf-8", function (err) {
-            if (err) throw err;
-        });
+    _writedata() {
+        fs.writeFileSync(
+            this.file,
+            JSON.stringify(this.data),
+            "utf-8",
+            function (err) {
+                if (err) throw err;
+            },
+        );
     }
     //Method to check if the book id exists or not
     loanExists(loanID) {
@@ -26,19 +31,19 @@ module.exports.Loan = class {
     //Method to add a loan given its a id
     addLoan(id, bodyData) {
         this.data[id] = bodyData;
-        this._writedata(this.file, this.data);
+        this._writedata();
     }
+    //This method updates the loan so that it changes the returned and dateReturned attributes of a loan
     updateLoan(id, returnDate) {
         for (const loanData in this.data) {
             if (loanData == id) {
-                console.log("true");
-                console.log(this.data[loanData].returned);
                 this.data[loanData].returned = true;
                 this.data[loanData].dateReturned = returnDate;
-                this._writedata(this.file, this.data);
+                this._writedata();
             }
         }
     }
+    //retrieves all the active loans, meaning that their returned attribute is set to false
     getActiveLoans() {
         let data = {};
         for (const loanData in this.data) {
@@ -48,7 +53,7 @@ module.exports.Loan = class {
         }
         return data;
     }
-
+    //method retrieves all the loans that have finished, so their returned state is true
     getFinishedLoans() {
         let data = {};
         for (const loanData in this.data) {

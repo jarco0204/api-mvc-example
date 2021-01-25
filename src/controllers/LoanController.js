@@ -34,7 +34,7 @@ const validateInputs = (body) => {
 //Controller to add an individual loan to the data
 // Checks to see if it valid, and then if the id doesn't exists
 module.exports.addController = (req, res) => {
-    if (checkValidId(req.params.id)) {
+    if (checkValidId(req.params.id, res)) {
         if (!loan.loanExists(req.params.id)) {
             if (validateInputs(req.body)) {
                 loan.addLoan(req.params.id, req.body);

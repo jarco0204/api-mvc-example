@@ -65,13 +65,10 @@ module.exports.Book = class {
         let loanData = JSON.parse(fs.readFileSync(loanFile, "utf-8"));
         for (const loan in loanData) {
             if (loanData[loan].bookId == bookId) {
-                {
-                    if (loanData[loan].returned == true) {
-                        return true;
-                    }
-                    return false; // can save operations
+                if (loanData[loan].returned == false) {
+                    return false;
                 }
-                return false;
+                return true; // can save operations
             }
         }
         return true;

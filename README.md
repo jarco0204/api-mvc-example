@@ -16,9 +16,13 @@ The latter has these attributes:
 5)was returned
 6)date of return
 
-The main constraints are:
+In order to run this code, write the following commands:
 
-a)The data should be stored and handled in your application as a JSON.
-b)When you start your server, the system should be able to load the data in the file(s) managing the
-books and loans.
-c)All get operations should send an outcome a JSON object.
+1)npm run install
+
+2)In one terminal window write: npm run dev
+
+3)In a different terminal window write:
+a)cd tests
+b)node book.test.js
+c)node loan.test.js
